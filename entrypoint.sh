@@ -1,11 +1,11 @@
-#!/bin/bash -l
+#!/bin/bash
 
 warn () {
   text=$1
   echo -e "\e[1;33m $text \e[0m"
 }
 
-failt () {
+fail () {
   text=$1
   echo -e "\e[1;31m $text \e[0m"
   exit 1
@@ -98,22 +98,22 @@ main() {
   if [ -n "$S3CMD_ADD_HEADERS" ]; then
       export IFS="|"
       for header in $S3CMD_ADD_HEADERS; do
-        ADD_HEADERS="--add-header=\"$header $ADD_HEADERS\""
+        ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
       done
   else
       ADD_HEADERS=""
   fi
 
-  SYNC="s3cmd sync $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
-  debug "$SYNC"
-  sync_output=$($SYNC)
+  command="s3cmd sync $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
+
+  debug $command
+
+  bash -c $command
   RESULT=$?
 
-  if [ $RESULT -eq 0 ]; then
-      debug "$sync_output"
+  if [[ $? -eq 0 ]]; then
       success 'Finished S3 Synchronisation';
   else
-      debug "$sync_output"
       fail 'Failed s3cmd command';
   fi
 

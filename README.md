@@ -13,12 +13,6 @@ Other very useful and very recommended options is settings cache headers for ass
 
 Place in a `.yml` file such as this one in your `.github/workflows` folder. [Refer to the documentation on workflow YAML syntax here.](https://help.github.com/en/articles/workflow-syntax-for-github-actions)
 
-#### The following example includes optimal defaults for a public static website:
-
-- `--acl public-read` makes your files publicly readable (make sure your [bucket settings are also set to public](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html)).
-- `--follow-symlinks` won't hurt and fixes some weird symbolic link problems that may come up.
-- Most importantly, `--delete` **permanently deletes** files in the S3 bucket that are **not** present in the latest version of your repository/build.
-- **Optional tip:** If you're uploading the root of your repository, adding `--exclude '.git/*'` prevents your `.git` folder from syncing, which would expose your source code history if your project is closed-source. (To exclude more than one pattern, you must have one `--exclude` flag per exclusion. The single quotes are also important!)
 
 ```yaml
 name: Publish
@@ -71,4 +65,3 @@ The following settings must be passed as environment variables as shown in the e
 ## License
 
 This project is distributed under the [MIT license](LICENSE.md).
-

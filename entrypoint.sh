@@ -65,12 +65,14 @@ main() {
     export AWS_REGION="us-east-1"
   fi
 
-  if [ -z "$S3CMD_CF_INVALIDATE" ]; then
-    S3CMD_CF_INVALIDATE="--cf-invalidate"
+  if [ -n "$S3CMD_CF_INVALIDATE" ]; then
+      if [ "$S3CMD_CF_INVALIDATE" = "true" ]; then
+          S3CMD_CF_INVALIDATE="--cf-invalidate"
+      fi
   fi
 
   if [ -z "$S3CMD_EXTRA_OPTS" ]; then
-    export S3CMD_EXTRA_OPTS="--verbose"
+      S3CMD_EXTRA_OPTS="--verbose"
   fi
 
   if [ -z "$S3CMD_DELETE_REMOVED" ]; then

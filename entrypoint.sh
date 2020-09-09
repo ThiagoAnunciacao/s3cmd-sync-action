@@ -73,7 +73,7 @@ main() {
     export S3CMD_EXTRA_OPTS="--verbose"
   fi
 
-  if [ -n "$S3CMD_DELETE_REMOVED" ]; then
+  if [ -z "$S3CMD_DELETE_REMOVED" ]; then
       if [ "$S3CMD_DELETE_REMOVED" = "true" ]; then
           export S3CMD_DELETE_REMOVED="--delete-removed"
       else
@@ -84,17 +84,19 @@ main() {
   fi
 
   if [ -z "$S3CMD_EXCLUDE" ]; then
-    export S3CMD_EXCLUDE="--exclude-from $S3CMD_EXCLUDE"
+    S3CMD_EXCLUDE="--exclude-from $S3CMD_EXCLUDE"
   fi
 
-  if [ -n "$S3CMD_EXCLUDE_FROM"]; then
+  if [ -n "$S3CMD_EXCLUDE_FROM" ]; then
       if [ -e "$S3CMD_EXCLUDE_FROM" ]; then
-          export S3CMD_EXCLUDE_FROM="--exclude-from $S3CMD_EXCLUDE_FROM"
+          S3CMD_EXCLUDE_FROM="--exclude-from $S3CMD_EXCLUDE_FROM"
       fi
   fi
 
-  if [ -z "$S3CMD_CACHE_CONTROL_MAX_AGE"]; then
-      S3CMD_CACHE_CONTROL_MAX_AGE="--add-header=Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE"
+  if [ -n "$S3CMD_CACHE_CONTROL_MAX_AGE" ]; then
+      S3CMD_CACHE_CONTROL_MAX_AGE='--add-header="Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE"'
+  else
+      S3CMD_CACHE_CONTROL_MAX_AGE=""
   fi
 
   set +e
@@ -102,7 +104,7 @@ main() {
   debug "$SYNC"
   local sync_output=$($SYNC)
 
-  if [[ $? -ne 0 ]];then
+  if [ $? -ne 0 ]; then
       debug "$sync_output"
       fail 'Failed s3cmd command';
   else

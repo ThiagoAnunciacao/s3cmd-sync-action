@@ -1,0 +1,9 @@
+name: "S3CMD Sync Action"
+description: "Sync a directory with a remote S3 bucket using s3cmd with very useful options like set cache-control and invalidate CloudFront files"
+author: ThiagoAnunciacao
+runs:
+  using: docker
+  image: Dockerfile
+branding:
+  icon: refresh-cw
+  color: green

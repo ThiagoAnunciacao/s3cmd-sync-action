@@ -96,7 +96,7 @@ main() {
   fi
 
   if [ -n "$S3CMD_CACHE_CONTROL_MAX_AGE" ]; then
-      S3CMD_CACHE_CONTROL_MAX_AGE='--add-header="Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE"'
+      S3CMD_CACHE_CONTROL_MAX_AGE="--add-header=\"Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE\""
   else
       S3CMD_CACHE_CONTROL_MAX_AGE=""
   fi

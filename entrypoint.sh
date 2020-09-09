@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
 warn () {
   text=$1
@@ -98,25 +98,24 @@ main() {
   if [ -n "$S3CMD_ADD_HEADERS" ]; then
       export IFS="|"
       for header in $S3CMD_ADD_HEADERS; do
-        ADD_HEADERS="--add-header='$header' $ADD_HEADERS"
+        ADD_HEADERS="--add-header=$header $ADD_HEADERS"
       done
   else
       ADD_HEADERS=""
   fi
 
-  set +e
-  local SYNC="s3cmd sync $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
+  SYNC="s3cmd sync $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
   debug "$SYNC"
-  local sync_output=$($SYNC)
+  sync_output=$($SYNC)
+  RESULT=$?
 
-  if [ $? -ne 0 ]; then
-      debug "$sync_output"
-      fail 'Failed s3cmd command';
-  else
+  if [ $RESULT -eq 0 ]; then
       debug "$sync_output"
       success 'Finished S3 Synchronisation';
+  else
+      debug "$sync_output"
+      fail 'Failed s3cmd command';
   fi
-  set -e
 
   warn 'Removing .s3cfg credentials'
   rm "$HOME/.s3cfg"

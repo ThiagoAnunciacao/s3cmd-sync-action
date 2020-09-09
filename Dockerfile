@@ -1,7 +1,7 @@
 FROM python:3.8-alpine
 
 LABEL "com.github.actions.name"="s3cmd sync action"
-LABEL "com.github.actions.description"="Sync a directory with a remote S3 bucket using s3cmd with very useful options like set cache-control and invalidate CloudFront files."
+LABEL "com.github.actions.description"="Sync a dir with S3 bucket using s3cmd with options invalidate CloudFront files and cache-control max-age"
 LABEL "com.github.actions.icon"="refresh-cw"
 LABEL "com.github.actions.color"="green"
 

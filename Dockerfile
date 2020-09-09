@@ -6,9 +6,9 @@ LABEL "com.github.actions.icon"="refresh-cw"
 LABEL "com.github.actions.color"="green"
 
 LABEL version="0.1.0"
-LABEL repository="https://github.com/thiago.anunciaao/s3cmd-sync-action"
+LABEL repository="https://github.com/ThiagoAnunciacao/s3cmd-sync-action"
 LABEL homepage="https://thiago.anunciacao.com/"
-LABEL maintainer="Thiago Anunciação <thiago.anunciacao@me.com>"
+LABEL maintainer="Thiago Anunciacao <thiago.anunciacao@me.com>"
 
 # https://github.com/s3tools/s3cmd/blob/master/NEWS
 

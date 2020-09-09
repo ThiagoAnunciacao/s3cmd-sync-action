@@ -98,7 +98,7 @@ main() {
   if [ -n "$S3CMD_ADD_HEADERS" ]; then
       export IFS="|"
       for header in $S3CMD_ADD_HEADERS; do
-        ADD_HEADERS="--add-headers=\"$header\" $ADD_HEADERS"
+        ADD_HEADERS="--add-headers='$header' $ADD_HEADERS"
       done
   else
       ADD_HEADERS=""
@@ -117,6 +117,9 @@ main() {
       success 'Finished S3 Synchronisation';
   fi
   set -e
+
+  warn 'Removing .s3cfg credentials'
+  rm "$HOME/.s3cfg"
 }
 
 main

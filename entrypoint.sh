@@ -96,7 +96,7 @@ main() {
   fi
 
   if [ -n "$S3CMD_ADD_HEADERS" ]; then
-      export IFS=";"
+      export IFS="|"
       for header in $S3CMD_ADD_HEADERS; do
         ADD_HEADERS="--add-headers=\"$header\" $ADD_HEADERS"
       done

@@ -14,8 +14,8 @@ LABEL maintainer="Thiago Anunciação <thiago.anunciacao@me.com>"
 
 RUN pip install s3cmd
 
-RUN chmod u+x entrypoint.sh
-
 ADD entrypoint.sh /entrypoint.sh
+
+RUN chmod u+x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

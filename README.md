@@ -27,19 +27,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ThiagoAnunciacao/s3cmd-sync-action@master
+    - uses: ThiagoAnunciacao/s3cmd-sync-action@0.2.0
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_REGION: 'us-east-1'                 # optional: defaults to us-east-1
-        S3CMD_SOURCE_DIR: 'compiled'            # optional: defaults ./ to entire repository
-        S3CMD_EXCLUDE: '.git/*'                 # optional: defaults empty
-        S3CMD_EXCLUDE_FROM: 'file-name'         # optional: defaults empty
-        S3CMD_DELETE_REMOVED: 'true'            # optional: default true
-        S3CMD_ADD_HEADERS: '' # optional: defaults to 1 (one) year in seconds
-        S3CMD_CF_INVALIDATE: 'true'             # optional: default true
-        S3CMD_EXTRA_OPTS: '--verbose'           # optional: default --verbose
+        AWS_REGION: 'us-east-1'        # optional: defaults to us-east-1
+        S3CMD_SOURCE_DIR: 'compiled'   # optional: defaults ./ to entire repository
+        S3CMD_EXCLUDE: '.git/*'        # optional: defaults empty
+        S3CMD_EXCLUDE_FROM: ''         # optional: defaults empty
+        S3CMD_DELETE_REMOVED: 'true'   # optional: default true
+        S3CMD_ADD_HEADERS: ''          # optional: defaults empty
+        S3CMD_CF_INVALIDATE: 'true'    # optional: default true
+        S3CMD_EXTRA_OPTS: '--verbose'  # optional: default --verbose
 ```
 
 
@@ -57,7 +57,7 @@ The following settings must be passed as environment variables as shown in the e
 | `S3CMD_EXCLUDE`         | Filenames and paths matching GLOB will be excluded.                                                                                                                                                                         | `env`          | No       | N/A                                           |                                                         |
 | `S3CMD_EXCLUDE_FROM`    | Read --exclude GLOBs from FILE.                                                                                                                                                                                             | `env`          | No       | N/A                                           |                                                         |
 | `S3CMD_DELETE_REMOVED`  | Delete destination objects with no corresponding source file [sync].                                                                                                                                                        | `env`          | No       | `true`                                        |                                                         |
-| `S3CMD_ADD_HEADERS`     | Add a given HTTP header to the upload request. Give values separeted by `\` (pipes)                                                                                                                                         | `env`          | No       | `Expires:`date -u +"%a, %d %b %Y %H:%M:%S GMT | Cache-Control:max-age=31556952` (one year)            | |
+| `S3CMD_ADD_HEADERS`     | Add a given HTTP header to the upload request. Give values separeted by `|` (pipes)                                                                                                                                         | `env`          | No       | `Expires:`date -u +"%a, %d %b %Y %H:%M:%S GMT | Cache-Control:max-age=31556952` (one year)            | |
 | `S3CMD_CF_INVALIDATE`   | Invalidate the uploaded filed in CloudFront.                                                                                                                                                                                | `env`          | No       | `true`                                        |                                                         |
 | `S3CMD_EXTRA_OPTS`      | Some other useful options that could be used [More info here.](https://s3tools.org/usage).                                                                                                                                  | `env`          | No       | `--verbose`                                   |                                                         |
 

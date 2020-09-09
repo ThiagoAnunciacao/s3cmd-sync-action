@@ -12,6 +12,8 @@ LABEL maintainer="Thiago Anunciacao <thiago.anunciacao@me.com>"
 
 # https://github.com/s3tools/s3cmd/blob/master/NEWS
 
+RUN apk add --update bash
+
 RUN pip install s3cmd
 
 ADD entrypoint.sh /entrypoint.sh

@@ -66,7 +66,7 @@ main() {
   fi
 
   if [ -z "$S3CMD_CF_INVALIDATE" ]; then
-    export S3CMD_CF_INVALIDATE="--cf-invalidate"
+    S3CMD_CF_INVALIDATE="--cf-invalidate"
   fi
 
   if [ -z "$S3CMD_EXTRA_OPTS" ]; then
@@ -94,7 +94,7 @@ main() {
   fi
 
   if [ -z "$S3CMD_CACHE_CONTROL_MAX_AGE"]; then
-      export S3CMD_CACHE_CONTROL_MAX_AGE="--add-header=Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE"
+      S3CMD_CACHE_CONTROL_MAX_AGE="--add-header=Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE"
   fi
 
   set +e

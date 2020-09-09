@@ -16,6 +16,4 @@ RUN pip install s3cmd
 
 ADD entrypoint.sh /entrypoint.sh
 
-RUN chmod u+x /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]

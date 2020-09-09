@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -l
 
 warn () {
   text=$1

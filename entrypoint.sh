@@ -23,7 +23,7 @@ info () {
 
 debug () {
   text=$1
-  echo -e "\e[1;44m $text \e[0m"
+  echo -e "\e[1;40m $text \e[0m"
 }
 
 set_auth() {
@@ -95,14 +95,17 @@ main() {
       fi
   fi
 
-  if [ -n "$S3CMD_CACHE_CONTROL_MAX_AGE" ]; then
-      S3CMD_CACHE_CONTROL_MAX_AGE="--add-header=Cache-Control:max-age=$S3CMD_CACHE_CONTROL_MAX_AGE"
+  if [ -n "$S3CMD_ADD_HEADERS" ]; then
+      export IFS=";"
+      for header in $S3CMD_ADD_HEADERS; do
+        ADD_HEADERS="--add-headers=\"$header\" $ADD_HEADERS"
+      done
   else
-      S3CMD_CACHE_CONTROL_MAX_AGE=""
+      ADD_HEADERS=""
   fi
 
   set +e
-  local SYNC="s3cmd sync $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $S3CMD_CACHE_CONTROL_MAX_AGE $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
+  local SYNC="s3cmd sync $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
   debug "$SYNC"
   local sync_output=$($SYNC)
 

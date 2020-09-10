@@ -1,4 +1,5 @@
-name: CI
+name: "test itself"
+
 on:
   push:
   pull_request:
@@ -6,10 +7,11 @@ on:
     - cron: '0 7 * * 1'
 
 jobs:
-  unit-test:
+  test:
     name: build and unit tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: S3cmd sync
         uses: ./
         env:

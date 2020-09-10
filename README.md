@@ -1,3 +1,5 @@
+![CI](https://github.com/ThiagoAnunciacao/s3cmd-sync-action/workflows/CI/badge.svg)
+
 # GitHub Action to Sync S3 Bucket using s3cmd 🔄
 
 This action uses the [s3cmd](https://s3tools.org/usage) to sync a directory (either from your repository or generated during your workflow) with a remote S3 bucket.
@@ -27,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ThiagoAnunciacao/s3cmd-sync-action@0.1.1
+    - uses: ThiagoAnunciacao/s3cmd-sync-action@0.2.0
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

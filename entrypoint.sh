@@ -68,6 +68,8 @@ main() {
   if [ -n "$S3CMD_CF_INVALIDATE" ]; then
       if [ "$S3CMD_CF_INVALIDATE" = "true" ]; then
           S3CMD_CF_INVALIDATE="--cf-invalidate"
+      else
+        unset S3CMD_CF_INVALIDATE
       fi
   fi
 
@@ -96,12 +98,12 @@ main() {
   fi
 
   if [ -n "$S3CMD_ADD_HEADERS" ]; then
-      export IFS="|"
+      export IFS='|'
       for header in $S3CMD_ADD_HEADERS; do
         ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
       done
   else
-      ADD_HEADERS=""
+      ADD_HEADERS=''
   fi
 
   command="s3cmd sync --no-preserve $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"

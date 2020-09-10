@@ -14,7 +14,7 @@ LABEL maintainer="Thiago Anunciacao <thiago.anunciacao@me.com>"
 
 RUN apk add --update bash
 
-RUN pip install s3cmd python-magic
+RUN pip install s3cmd python-dateutil python-magic
 
 ADD entrypoint.sh /entrypoint.sh
 

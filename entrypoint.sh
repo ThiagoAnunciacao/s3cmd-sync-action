@@ -91,7 +91,6 @@ main() {
       if [ -e "$S3CMD_EXCLUDE" ]; then
         S3CMD_EXCLUDE="--exclude $S3CMD_EXCLUDE"
       else
-        S3CMD_EXCLUDE=''
         unset S3CMD_EXCLUDE
       fi
   fi
@@ -100,7 +99,6 @@ main() {
       if [ -e "$S3CMD_EXCLUDE_FROM" ]; then
           S3CMD_EXCLUDE_FROM="--exclude-from $S3CMD_EXCLUDE_FROM"
       else
-        S3CMD_EXCLUDE_FROM=''
         unset S3CMD_EXCLUDE_FROM
       fi
   fi

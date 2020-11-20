@@ -109,7 +109,7 @@ main() {
         ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
       done
   else
-      unset ADD_HEADERS
+      ADD_HEADERS=" "
   fi
 
   echo $ADD_HEADERS

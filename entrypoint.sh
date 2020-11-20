@@ -69,7 +69,7 @@ main() {
   if [ -z "$S3CMD_SOURCE_DIR" ]; then
     fail 'S3CMD_SOURCE_DIR is not set. Quitting.'
   else
-    S3CMD_SOURCE_DIR="./$S3CMD_SOURCE_DIR/*"
+    FILES_SOURCE_DIR="./$S3CMD_SOURCE_DIR/*"
   fi
 
   if [ -n "$S3CMD_CF_INVALIDATE" ]; then
@@ -116,12 +116,14 @@ main() {
         ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
       done
   else
-      ADD_HEADERS="--progress"
+      ADD_HEADERS=''
   fi
 
-  echo $ADD_HEADERS
+  COMMAND_SUFIX="sync $FILES_SOURCE_DIR s3://$AWS_S3_BUCKET"
 
-  command="s3cmd --no-preserve $S3CMD_EXTRA_OPTS $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_CF_INVALIDATE sync $S3CMD_SOURCE_DIR s3://$AWS_S3_BUCKET"
+  echo $COMMAND_SUFIX
+
+  command="s3cmd --no-preserve $S3CMD_EXTRA_OPTS $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_CF_INVALIDATE $COMMAND_SUFIX"
 
   echo $command
 

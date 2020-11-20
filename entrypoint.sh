@@ -69,7 +69,7 @@ main() {
   if [ -z "$S3CMD_SOURCE_DIR" ]; then
     fail 'S3CMD_SOURCE_DIR is not set. Quitting.'
   else
-    FILES_SOURCE_DIR="./$S3CMD_SOURCE_DIR/"
+    FILES_SOURCE_DIR="./$S3CMD_SOURCE_DIR/*"
   fi
 
   if [ -n "$S3CMD_CF_INVALIDATE" ]; then
@@ -119,7 +119,7 @@ main() {
       ADD_HEADERS=''
   fi
 
-  COMMAND_SUFIX="sync $FILES_SOURCE_DIR s3://$AWS_S3_BUCKET"
+  COMMAND_SUFIX="sync \"$FILES_SOURCE_DIR\" s3://$AWS_S3_BUCKET"
 
   echo $COMMAND_SUFIX
 

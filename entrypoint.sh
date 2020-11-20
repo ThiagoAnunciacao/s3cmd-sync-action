@@ -116,6 +116,8 @@ main() {
 
   command="s3cmd --no-preserve $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_EXTRA_OPTS $S3CMD_CF_INVALIDATE sync ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
 
+  echo $command
+
   debug $command
 
   bash -c $command

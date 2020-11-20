@@ -77,7 +77,7 @@ main() {
       S3CMD_EXTRA_OPTS="--verbose"
   fi
 
-  if [ -z "$S3CMD_DELETE_REMOVED" ]; then
+  if [ -n "$S3CMD_DELETE_REMOVED" ]; then
       if [ "$S3CMD_DELETE_REMOVED" = "true" ]; then
           export S3CMD_DELETE_REMOVED="--delete-removed"
       else
@@ -87,13 +87,21 @@ main() {
       export S3CMD_DELETE_REMOVED="--delete-removed"
   fi
 
-  if [ -z "$S3CMD_EXCLUDE" ]; then
-    S3CMD_EXCLUDE="--exclude-from $S3CMD_EXCLUDE"
+  if [ -n "$S3CMD_EXCLUDE" ]; then
+      if [ -e "$S3CMD_EXCLUDE" ]; then
+        S3CMD_EXCLUDE="--exclude $S3CMD_EXCLUDE"
+      else
+        S3CMD_EXCLUDE=''
+        unset S3CMD_EXCLUDE
+      fi
   fi
 
   if [ -n "$S3CMD_EXCLUDE_FROM" ]; then
       if [ -e "$S3CMD_EXCLUDE_FROM" ]; then
           S3CMD_EXCLUDE_FROM="--exclude-from $S3CMD_EXCLUDE_FROM"
+      else
+        S3CMD_EXCLUDE_FROM=''
+        unset S3CMD_EXCLUDE_FROM
       fi
   fi
 

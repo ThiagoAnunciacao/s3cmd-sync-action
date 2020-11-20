@@ -1,4 +1,4 @@
-name: "S3CMD Sync Action"
+name: "S3CMD Sync Action Test"
 description: "Sync a dir with S3 bucket using s3cmd with options invalidate CloudFront files and cache-control max-age"
 author: ThiagoAnunciacao
 runs:

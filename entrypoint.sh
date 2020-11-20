@@ -65,6 +65,13 @@ main() {
     export AWS_REGION="us-east-1"
   fi
 
+
+  if [ -z "$S3CMD_SOURCE_DIR" ]; then
+    fail 'S3CMD_SOURCE_DIR is not set. Quitting.'
+  else
+    S3CMD_SOURCE_DIR="./$S3CMD_SOURCE_DIR/*"
+  fi
+
   if [ -n "$S3CMD_CF_INVALIDATE" ]; then
       if [ "$S3CMD_CF_INVALIDATE" = "true" ]; then
           S3CMD_CF_INVALIDATE="--cf-invalidate"
@@ -114,7 +121,7 @@ main() {
 
   echo $ADD_HEADERS
 
-  command="s3cmd sync --no-preserve $S3CMD_EXTRA_OPTS $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_CF_INVALIDATE ./$S3CMD_SOURCE_DIR/* s3://$AWS_S3_BUCKET"
+  command="s3cmd --no-preserve $S3CMD_EXTRA_OPTS $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_CF_INVALIDATE sync $S3CMD_SOURCE_DIR s3://$AWS_S3_BUCKET"
 
   echo $command
 

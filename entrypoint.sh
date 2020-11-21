@@ -116,15 +116,14 @@ main() {
         ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
       done
   else
-      ADD_HEADERS=''
+      ADD_HEADERS="--add-header=\"Cache-Control: max-age=31556952\""
   fi
 
   COMMAND_SUFIX="sync $FILES_SOURCE_DIR s3://$AWS_S3_BUCKET"
 
   command="s3cmd --no-preserve $S3CMD_EXTRA_OPTS $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_CF_INVALIDATE $COMMAND_SUFIX"
 
-  echo $command
-  # debug $command
+  debug $command
 
   bash -c $command
   RESULT=$?

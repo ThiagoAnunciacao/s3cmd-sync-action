@@ -123,6 +123,8 @@ main() {
 
   command="s3cmd --no-preserve $S3CMD_EXTRA_OPTS $S3CMD_EXCLUDE_FROM $S3CMD_DELETE_REMOVED $ADD_HEADERS $S3CMD_CF_INVALIDATE $COMMAND_SUFIX"
 
+  echo $command
+
   debug $command
 
   bash -c $command

@@ -34,7 +34,7 @@ jobs:
           AWS_S3_BUCKET: 'github-actions-tests'
           AWS_REGION: 'us-east-1'
           S3CMD_SOURCE_DIR: '__tests__'
-          S3CMD_EXCLUDE: ''
+          S3CMD_EXCLUDE: '.git/*'
           S3CMD_EXCLUDE_FROM: ''
           S3CMD_DELETE_REMOVED: 'false'
           S3CMD_ADD_HEADERS: ''

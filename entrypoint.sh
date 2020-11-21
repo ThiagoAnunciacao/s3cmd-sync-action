@@ -110,14 +110,14 @@ main() {
       fi
   fi
 
-  if [ -n "$S3CMD_ADD_HEADERS" ]; then
-      export IFS='|'
-      for header in $S3CMD_ADD_HEADERS; do
-        ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
-      done
-  else
-      ADD_HEADERS="--add-header=\"Expires:$(date -u +'%a, %d %b %Y %H:%M:%S GMT')\""
+  if [ -z "$S3CMD_ADD_HEADERS" ]; then
+      S3CMD_ADD_HEADERS="Expires:$(date -u +'%a, %d %b %Y %H:%M:%S GMT')"
   fi
+
+  export IFS='|'
+  for header in $S3CMD_ADD_HEADERS; do
+    ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
+  done
 
   COMMAND_SUFIX="sync $FILES_SOURCE_DIR s3://$AWS_S3_BUCKET"
 

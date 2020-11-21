@@ -116,7 +116,7 @@ main() {
         ADD_HEADERS="--add-header=\"$header\" $ADD_HEADERS"
       done
   else
-      ADD_HEADERS="--add-header=\"Cache-Control: max-age=31556952\""
+      ADD_HEADERS="--add-header=\"Expires:$(date -u +'%a, %d %b %Y %H:%M:%S GMT')\""
   fi
 
   COMMAND_SUFIX="sync $FILES_SOURCE_DIR s3://$AWS_S3_BUCKET"

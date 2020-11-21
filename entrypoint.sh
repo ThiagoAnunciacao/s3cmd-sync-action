@@ -111,7 +111,7 @@ main() {
   fi
 
   if [ -z "$S3CMD_ADD_HEADERS" ]; then
-      S3CMD_ADD_HEADERS="Expires:$(date -u +'%a, %d %b %Y %H:%M:%S GMT')"
+      S3CMD_ADD_HEADERS=""
   fi
 
   export IFS='|'

@@ -67,7 +67,7 @@ main() {
 
 
   if [ -z "$S3CMD_SOURCE_DIR" ]; then
-    fail 'S3CMD_SOURCE_DIR is not set. Quitting.'
+    FILES_SOURCE_DIR="./*"
   else
     FILES_SOURCE_DIR="./$S3CMD_SOURCE_DIR/*"
   fi

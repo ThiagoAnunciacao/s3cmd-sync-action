@@ -69,7 +69,7 @@ main() {
   if [ -z "$S3CMD_SOURCE_DIR" ]; then
     FILES_SOURCE_DIR="./*"
   else
-    FILES_SOURCE_DIR="./$S3CMD_SOURCE_DIR/"
+    FILES_SOURCE_DIR="./$S3CMD_SOURCE_DIR"
   fi
 
   if [ -n "$S3CMD_CF_INVALIDATE" ]; then
